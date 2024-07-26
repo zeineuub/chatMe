@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from ..backend.chore.config import settings
+from backend.chore.config import settings
 # connection url
 SQLALCHEMY_DATABSE_URL= settings.DB_URL
 

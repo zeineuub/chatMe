@@ -17,6 +17,9 @@ class UserCreate(BaseModel):
     class Config:
         # allows to use Pydantic models to interact with databases
         orm_mode = True
-class TokenData(BaseModel):
+class Token(BaseModel):
     access_token: str
     user_id: int
+class TokenData(BaseModel):
+    user_id: int
+
