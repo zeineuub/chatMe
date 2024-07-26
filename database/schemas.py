@@ -1,6 +1,13 @@
 from pydantic import BaseModel,EmailStr, Field
 
+class Login(BaseModel):
+    password:str
+    email:str
 
+class User(BaseModel):
+    id:int
+    fullname:str
+    email:str
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
@@ -10,14 +17,6 @@ class UserCreate(BaseModel):
     class Config:
         # allows to use Pydantic models to interact with databases
         orm_mode = True
-class Auth(BaseModel):
-    password:str
-    email:EmailStr
-    class Config:
-        orm_mode = True
-class Authorize(BaseModel):
-    token:str
-class PostCreate(BaseModel):
-    content:str
-    class Config:
-        orm_mode = True
+class TokenData(BaseModel):
+    access_token: str
+    user_id: int
