@@ -1,25 +1,41 @@
-from pydantic import BaseModel,EmailStr, Field
+from datetime import datetime
+from typing import Optional
+from pydantic import BaseModel, EmailStr
 
+class Base(BaseModel):
+    created_at: datetime = datetime.now()
 class Login(BaseModel):
-    password:str
-    email:str
-
-class User(BaseModel):
-    id:int
-    fullname:str
-    email:str
-class UserCreate(BaseModel):
     email: EmailStr
     password: str
-    first_name: str
-    last_name:str
-    # Config class is used to convert dict to pydantic model
-    class Config:
-        # allows to use Pydantic models to interact with databases
-        orm_mode = True
-class Token(BaseModel):
-    access_token: str
-    user_id: int
-class TokenData(BaseModel):
-    user_id: int
 
+    class Config:
+        from_attributes = True
+
+class User(Base):
+    id: int
+    fullname: str
+    email: EmailStr
+
+    class Config:
+        from_attributes = True
+
+class UserCreate(Base):
+    email: EmailStr
+    password: str
+    firstname: str
+    lastname: str
+
+    class Config:
+        from_attributes = True
+
+class Token(Base):
+    access_token: str
+    token_type: str
+
+class TokenData(Base):
+    user_id: Optional[str] = None
+
+class PostCreate(Base):
+    id:int
+    content:str
+    created_by: User
