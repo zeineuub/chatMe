@@ -6,11 +6,16 @@ from datetime import datetime
 from sqlalchemy import Integer
 from sqlalchemy.orm import mapped_column, Mapped
 
+
 @as_declarative()
 class Base:
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True,autoincrement=True)
-    created_at: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, index=True, autoincrement=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
+    )
 
     @declared_attr
-    def __tablename__(cls) -> str:
+    def __tablename__(cls: type) -> str:
         return cls.__name__.lower()
