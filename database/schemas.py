@@ -25,7 +25,7 @@ class UserBase(Base):
         from_attributes = True
 
 
-class UserCreate(UserBase):
+class UserCreate(BaseModel):
     password: str
 
 
@@ -50,3 +50,10 @@ class Post(Base):
 
 class PostCreate(BaseModel):
     content: str
+
+
+class Friendship(BaseModel):
+    sender_id: int
+    receiver_id: int
+    status: str
+    chat_id: Optional[int] = None
