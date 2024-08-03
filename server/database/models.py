@@ -94,3 +94,6 @@ class Message(Base):
     chat: Mapped[Chat] = relationship("Chat", back_populates="history")
     sender_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
     sender: Mapped[User] = relationship("User")
+    receiver_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
+    receiversender: Mapped[User] = relationship("User")
+    seen: Mapped[bool] = mapped_column(bool, default=False)
