@@ -1,6 +1,6 @@
 import enum
 from typing import Optional
-from sqlalchemy import ForeignKey, Integer, String, Enum
+from sqlalchemy import Boolean, ForeignKey, Integer, String, Enum
 from sqlalchemy.orm import relationship, mapped_column, Mapped
 from .base import Base
 
@@ -96,4 +96,4 @@ class Message(Base):
     sender: Mapped[User] = relationship("User")
     receiver_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"))
     receiversender: Mapped[User] = relationship("User")
-    seen: Mapped[bool] = mapped_column(bool, default=False)
+    seen: Mapped[bool] = mapped_column(Boolean, default=False)
