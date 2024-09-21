@@ -18,7 +18,9 @@ def create_user(user_data: UserCreate, db: Session):
 
 
 @router.get("/{id}", response_model=User, status_code=status.HTTP_200_OK)
-def get_user(id: int, db: Session = Depends(get_db)):
+def get_user(id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user),):
+    if id is not current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not allowed")
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
         raise HTTPException(
